@@ -73,7 +73,24 @@ body {
   background-color: white;
 }
 
+form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-body-header input {
+  width: 95%;
+  height: 100%;
+  font-style: italic;
+  font-size: 20px;
+  border: none;
+}
+
+#edit-input {
   width: 95%;
   height: 100%;
   font-style: italic;
@@ -120,4 +137,8 @@ ul li div {
   justify-content: center;
   align-items: center;
   font-style: italic;
+}
+
+i {
+  cursor: pointer;
 }
