@@ -39,13 +39,7 @@ document.getElementById('submit').addEventListener('click', () => {
   }
 });
 document.getElementById('clear-all').addEventListener('click', () => {
-  while (taskData.tasks.length > 0) {
-    taskData.pop();
-  }
-  if (localStorage.getItem('NOTE')) {
-    localStorage.setItem('NOTE', JSON.stringify(taskData));
-  }
-
+  taskData.clearCompletedTasks();
   component();
 });
 

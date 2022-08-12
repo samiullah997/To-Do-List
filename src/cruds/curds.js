@@ -38,6 +38,16 @@ class Cruds {
     this.updateLocalStorage();
   }
 
+  clearCompletedTasks() {
+    this.tasks = this.tasks.filter((task) => !task.completed);
+
+    this.tasks = this.tasks.map((task, index) => ({
+      ...task,
+      index,
+    }));
+    this.updateLocalStorage();
+  }
+
   updateLocalStorage() {
     window.localStorage.setItem('NOTE', JSON.stringify(this.tasks));
   }

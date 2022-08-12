@@ -18,11 +18,24 @@ const tasks = (dataTask) => {
     input.type = 'checkbox';
     input.id = 'checkbox';
     input.className = 'checkbox';
+    input.addEventListener('change', (event) => {
+      const index = task.tasks.findIndex((t) => listItem.index === t.index);
+      if (index === -1) {
+        return;
+      }
+
+      task.tasks[index].completed = event.target.checked;
+    });
     div.appendChild(input);
     const desc = document.createElement('p');
     desc.id = 'list-header';
-    desc.innerText = `${listItem.description} ${listItem.index}`;
+    desc.innerText = `${listItem.description} ${listItem.index + 1}`;
     div.appendChild(desc);
+    if (listItem.completed) {
+      input.setAttribute('checked', 'checked');
+      desc.style.textDecoration = 'line-through';
+      desc.style.color = '#A3A3A3';
+    }
     const editButton = document.createElement('i');
     editButton.classList = 'fa-solid fa-ellipsis-vertical';
     editButton.id = 'edit';
@@ -43,7 +56,7 @@ const tasks = (dataTask) => {
     };
     const editInput = document.createElement('input');
     editInput.id = `input-${listItem.index}`;
-    editInput.value = `${listItem.description} ${listItem.index}`;
+    editInput.value = `${listItem.description} ${listItem.index + 1}`;
     editInput.style.display = 'none';
     editInput.onfocus = () => {
       submitButton.style.display = 'unset';
