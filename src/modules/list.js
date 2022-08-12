@@ -1,10 +1,10 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-restricted-globals */
-
 import Cruds from '../cruds/curds.js';
 
 const task = new Cruds();
-const tasks = (dataTask) => {
+const tasks = () => {
+  const dataTask = task.getSortedTasks();
   const ul = document.getElementById('ul');
   ul.id = 'ul';
   ul.innerHTML = '';
@@ -18,20 +18,39 @@ const tasks = (dataTask) => {
     input.type = 'checkbox';
     input.id = 'checkbox';
     input.className = 'checkbox';
+    input.addEventListener('change', (event) => {
+      const index = task.tasks.findIndex((t) => listItem.index === t.index);
+      if (index === -1) {
+        return;
+      }
+      task.tasks[index].completed = event.target.checked;
+      task.editTask(listItem, listItem.description);
+      if (listItem.completed) {
+        input.setAttribute('checked', 'checked');
+        desc.style.textDecoration = 'line-through';
+        desc.style.color = '#A3A3A3';
+        document.getElementById('clear-all').style.textDecoration = 'underline';
+      }
+    });
+    document.getElementById('clear-all').addEventListener('click', () => {
+      task.clearCompletedTasks();
+      location.reload();
+    });
     div.appendChild(input);
     const desc = document.createElement('p');
     desc.id = 'list-header';
-    desc.innerText = `${listItem.description} ${listItem.index}`;
-    div.appendChild(desc);
-    const editButton = document.createElement('i');
-    editButton.classList = 'fa-solid fa-ellipsis-vertical';
-    editButton.id = 'edit';
-    editButton.onclick = () => {
+    desc.innerText = `${listItem.description}`;
+    desc.onclick = () => {
       editInput.style.display = 'unset';
       desc.style.display = 'none';
       removeList.style.display = 'unset';
       editButton.style.display = 'none';
     };
+    div.appendChild(desc);
+    const editButton = document.createElement('i');
+    editButton.classList = 'fa-solid fa-ellipsis-vertical';
+    editButton.id = 'edit';
+
     li.appendChild(editButton);
     const removeList = document.createElement('i');
     removeList.classList = 'fa-solid fa-trash-arrow-up';
@@ -41,9 +60,10 @@ const tasks = (dataTask) => {
       task.removeTask(listItem);
       location.reload();
     };
+    li.appendChild(removeList);
     const editInput = document.createElement('input');
     editInput.id = `input-${listItem.index}`;
-    editInput.value = `${listItem.description} ${listItem.index}`;
+    editInput.value = `${listItem.description}`;
     editInput.style.display = 'none';
     editInput.onfocus = () => {
       submitButton.style.display = 'unset';
@@ -67,7 +87,6 @@ const tasks = (dataTask) => {
       location.reload();
     };
     li.appendChild(submitButton);
-    li.appendChild(removeList);
   });
   return ul;
 };
