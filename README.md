@@ -11,6 +11,18 @@
 
 ## Getting Started
 To get a local copy up and running follow these simple example steps:
+Create a package.json file (contains module/dependency, documentation, project information) with the command:
+mkdir webpack-demo
+cd webpack-demo
+npm init -y
+npm install webpack webpack-cli --save-dev
+Install webpack with node/npm with the command: npm install -g webpack
+Install babel-loader (helps to convert ES6 to ES5) node/npm with command: npm npm install --save lodash
+Create a webpack.config.js
+Run command: npx webpack
+In the .html file with script src use a path of newly created bundle.js file
+Run Command: npm run build
+
 ## prerequisites
 -must have git installed.
 -must have vscode installed or any other IDE.

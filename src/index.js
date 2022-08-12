@@ -6,7 +6,7 @@ import Cruds from './cruds/curds.js';
 const taskData = new Cruds();
 function component() {
   const cardBody = document.getElementById('card-body');
-  cardBody.innerHTML = tasks(taskData.getSortedTasks());
+  cardBody.innerHTML = tasks();
   return cardBody;
 }
 
@@ -21,7 +21,7 @@ form.addEventListener('submit', (event) => {
       index: taskData.tasks.length,
     });
     note.value = '';
-    component();
+    location.reload();
     form.reset();
   }
 });
@@ -35,12 +35,8 @@ document.getElementById('submit').addEventListener('click', () => {
       index: taskData.tasks.length,
     });
     note.value = '';
-    component();
+    location.reload();
   }
-});
-document.getElementById('clear-all').addEventListener('click', () => {
-  taskData.clearCompletedTasks();
-  component();
 });
 
 document.getElementById('refresh').addEventListener('click', () => {
