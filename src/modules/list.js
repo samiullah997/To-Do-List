@@ -6,7 +6,6 @@ const task = new Cruds();
 const tasks = () => {
   const dataTask = task.getSortedTasks();
   const ul = document.getElementById('ul');
-  ul.id = 'ul';
   ul.innerHTML = '';
   dataTask.forEach((listItem) => {
     const li = document.createElement('li');
