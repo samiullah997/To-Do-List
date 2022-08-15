@@ -29,6 +29,10 @@ const tasks = () => {
         desc.style.textDecoration = 'line-through';
         desc.style.color = '#A3A3A3';
         document.getElementById('clear-all').style.textDecoration = 'underline';
+      } else {
+        input.setAttribute('checked', 'unchecked');
+        desc.style.textDecoration = 'none';
+        desc.style.color = '#000';
       }
     });
     document.getElementById('clear-all').addEventListener('click', () => {
